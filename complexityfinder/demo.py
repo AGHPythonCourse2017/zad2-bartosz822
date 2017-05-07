@@ -1,6 +1,6 @@
 import math as m
 import numpy as np
-from complexityfinder import complexity_finder, arr_generator, simple_cleaner
+from finder import complexity_finder, arr_generator, simple_cleaner
 
 def qsort(arr):
     np.sort(arr, kind='quicksort')

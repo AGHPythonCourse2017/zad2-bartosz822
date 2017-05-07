@@ -2,7 +2,7 @@ import argparse
 import logging
 import time
 
-from complexityfinder import log_setter
+from finder import log_setter
 from demo import demo
 
 log = False
