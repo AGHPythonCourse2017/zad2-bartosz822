@@ -2,8 +2,8 @@ import argparse
 import logging
 import time
 
-from finder import log_setter
-from demo import demo
+from complexityfinder.finder import log_setter, complexity_finder
+from complexityfinder.demo import demo
 
 log = False
 
@@ -26,8 +26,7 @@ def main():
     if args.demo:
         demo()
     else:
-        from your_function import fun, setup, clean
-        from complexityfinder import complexity_finder
+        from complexityfinder.your_function import fun, setup, clean
         complexity_finder(fun, setup, clean).print_some_info()
 
 
