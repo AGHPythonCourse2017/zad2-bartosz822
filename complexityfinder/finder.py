@@ -6,8 +6,8 @@ import numpy as np
 from scipy.optimize import curve_fit
 from functools import wraps
 
-from complexity import Complexity
-from complexityFunctions import funs
+from complexityfinder.complexity import Complexity
+from complexityfinder.complexityFunctions import funs
 
 log = False
 
