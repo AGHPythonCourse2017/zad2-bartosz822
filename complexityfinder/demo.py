@@ -64,9 +64,6 @@ def simple_logn(arr):
     return [x*2 for x in range(0, n)]
 
 
-def simple_const(arr):
-    return arr[0]
-
 
 def demo():
     complexity_finder(bubble_sort, arr_generator, simple_cleaner, 10).print_some_info()
@@ -77,4 +74,3 @@ def demo():
     complexity_finder(add_one, arr_generator, simple_cleaner, 10).print_some_info()
     complexity_finder(simple_n3, arr_generator, simple_cleaner, 10).print_some_info()
     complexity_finder(simple_logn, arr_generator, simple_cleaner, 10).print_some_info()
-    complexity_finder(simple_const, arr_generator, simple_cleaner, 10).print_some_info()

@@ -1,50 +1,68 @@
-# Programowanie w jezyku Python 2016/2017 zadanie 2
+# Complexity Finder
 
-W celu oszacowania czasu wykonania programu kuszące jest czasem zalozyc liniowa złożoność obliczeniowa.
-Czas sortowania możemy oszacować monotonicznej listy na 17.9 us dla 1000 elementów:
+## Intro 
+Complexity finder is a tool that enables it's user to determine computational comlexity of a function in python.
 
+### Instalation
+If you want to install it as a library just do:
 ```bash
-python -m timeit -s "s = list(range(1000))" "sorted(s)"
-100000 loops, best of 3: 17.9 usec per loop
+pip install git+https://github.com/AGHPythonCourse2017/zad2-bartosz822
+```
+#### Using as a library 
+When you've installed successfully this tool you can simply:
+```python
+import complexityfinder.finder as cf
+```
+and then you can use it
+```python
+complexity = cf.complexity_finder(sorted, cf.arr_generator, cf.simple_cleaner, timeout=10)
+complexity.print_some_info()
 ```
 
-
-Próbując uogólnić ten wynik na listę składająca sie z 10^6 elementów spodziewalibyśmy się wyniku okolo 18 ms. Dokonując pomiaru otrzymujemy jednak czas o około 35% większy: 
-
+### Simple testing
+If you want to use this tool as an executable you can clone the repository and run main.py
 ```bash
-python -m timeit -s "s = list(range(1000000))" "sorted(s)"
-10 loops, best of 3: 24.5 msec per loop
+git clone https://github.com/AGHPythonCourse2017/zad2-bartosz822
+cd zad2-bartosz822/complexity
+python main.py
 ```
 
+####Using as an executable
+Function to test should be implemented in _your_function.py_. After implementing it you can run the program.
 
-Przygotuj program do automatycznego wyznaczania złożoności obliczeniowej.
+#####Command line arguments
+- **--log, -l** enable logging
+- **--demo,  -d** run demo
 
-Program ten powinien otrzymywać na wejściu:
- -  Inicjalizacje odpowiednich struktur
- - Funkcje lub klase odpowiedzialna za wykonanie algorytmu
- - Kod odpowiedzialny za posprzątanie
 
-Jako wynik powinniśmy otrzymać:
- - Informacje o przypuszczalnej klasie złożoności obliczeniowej ( O(n), O(n log(n)), O(n^2))
- - Funkcje umożliwiające przewidywanie jaki będzie czas wykonania programu dla zadanej wielkości problemu
- - Funkcję umożliwiającą przewidywanie jaki jest maksymalny rozmiar problemu obliczeniowego dla zadanego czasu
+##Functionality
+###Find complexity of a function:
+```python
+complexity = cf.complexity_finder(fun, setup, clean)
+```
+where:
+- _fun_ - is a function to be tested
+- _setup_ - is a function that takes a nuber and returnes structure for _fun_ to work on
+- _clean_ - is a function that cleans after fun execution
 
-Wyznaczanie złożoności niektórych algorytmów może trwać bardzo długo. Aby umożliwić wykonanie programu w rozsądnym czasie program powinien posiadać ograniczenie w postaci parametru “timeout” ustawionego domyślnie na 30 sekund. W przypadku nie otrzymania ostatecznego wyniku w założonym czasie program powinien zwrócić wynik cząstkowy (np “złożoność gorsza niż O(n)”).
+functions should provide this functionality:
+```python
+#n - problem size
+structure = setup(n)
+res = function(setup)
+clean(res)
+```
+###Complexity class
+Objects of class Complexity are results of running complexity_finder and provide methods such as:
+- _estimate_time(size)_ - returns info of how long will the function run for a given problem size 
+- _estimate_size(time)_ - returns info of how big can the problem be for the function to end in given time
+- _get_info_ - returns information about functions complexity
 
-Program powinien dać się zainstalować jako pakiet pip bezpośrednio z repozytorium (np używając komendy 
-`pip install git+https://github.com/AGHPythonCourse2017/zad01-grzanka.git`)
+###Helper functions
+- arr_generator(n) - simple setuper for list - based problems
+- simple_cleaner - del based cleaner
+- simple_setup - identity function
+- test_it(f, n, setup, clean) - return execution time of a single function
 
-Program powinien wykorzystywać następujące elementy:
- - Logger
- - dekoratory
- - własne wyjątki
 
-Program powinien przejść test flake8 (zgodność z PEP8).
 
-Za wykonania zadania mozna zdobyc maksymalnie 0.9 punktu.
-
-Dodatkowo trzeba wykonać trzy recenzje rozwiązań zadania nr 1 i umieścić w repozytorium w pliku review.txt odnośniki do odpowiednich “Pull request”. Ten fragment zadania umożliwia zdobycie maksymalnie 0.1 punktu.
-
-Tresc zadania w Google Drive: https://goo.gl/r87sPE
-
-Termin oddania zadania: 8 maja 2017, 20:00
