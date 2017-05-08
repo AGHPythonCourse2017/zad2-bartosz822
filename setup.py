@@ -21,7 +21,7 @@ test_requirements = [
 
 setup(
     name='complexityfinder',
-    version='0.21.43',
+    version='0.22.37',
     description="complexityFinder helps you find computational complexity of your function",
     long_description=readme + '\n\n' + history,
     author="Bartosz Radzyński",

@@ -2,10 +2,12 @@ import argparse
 import logging
 import time
 
-from complexityfinder.finder import log_setter, complexity_finder
+from complexityfinder.finder import log_setter, complexity_finder, FunctionFailure
 from complexityfinder.demo import demo
+from complexityfinder.complexity import BadArgument
 
 log = False
+
 
 def main():
     parser = argparse.ArgumentParser(description='Parse generator options')
@@ -27,7 +29,14 @@ def main():
         demo()
     else:
         from complexityfinder.your_function import fun, setup, clean
-        complexity_finder(fun, setup, clean).print_some_info()
+        try:
+            complexity_finder(fun, setup, clean).print_some_info()
+        except BadArgument:
+            print("Bad argument has been passed to the function")
+        except FunctionFailure:
+            print("Provided function has failed")
+        except:
+            print("Something terribly wrong has happened")
 
 
 if __name__ == '__main__':

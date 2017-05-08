@@ -22,7 +22,7 @@ class FunctionFailure(Exception):
 
 
 def arr_generator(n):
-    return np.random.randint(100, size=n)
+    return np.random.randint(1000, size=n)
 
 
 def simple_cleaner(arg):
@@ -74,7 +74,7 @@ def test_it(f, n, setup, clean):
 
 def probing_generator():
     def probing_fun(y):
-        return max(int(0.1 * y ** 2), 1)
+        return max(int(0.1 * y ** 2), y)
 
     x = 1
     while True:
@@ -96,7 +96,7 @@ def tester_fun(f, timeout, *args):
         try:
             times = []
             for j in multiple_results:
-                t = j.get(timeout=2)
+                t = j.get(timeout=3)
                 times.append(t)
             tmp.append((val, np.median(times)))
 
@@ -107,6 +107,8 @@ def tester_fun(f, timeout, *args):
 
 def complexity_finder(f, setup=simple_setup, clean=simple_cleaner, timeout=30):
     tmp = tester_fun(f, timeout, setup, clean, )
+    if len(tmp) < 3:
+        raise FunctionFailure("Unable to determine function's complexity in reasonable time")
     x1 = np.array([x[0] for x in tmp])
     y1 = np.array([x[1] for x in tmp])
     res = []

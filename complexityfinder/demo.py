@@ -51,8 +51,7 @@ def doubler(arr):
     return [x * 2 for x in arr]
 
 
-def add_one(arr):
-    return [x + 1 for x in arr]
+
 
 
 def simple_n3(arr):
@@ -71,6 +70,5 @@ def demo():
     complexity_finder(sorted, arr_generator, simple_cleaner, 10).print_some_info()
     complexity_finder(merge_sort, arr_generator, simple_cleaner, 10).print_some_info()
     complexity_finder(doubler, arr_generator, simple_cleaner, 10).print_some_info()
-    complexity_finder(add_one, arr_generator, simple_cleaner, 10).print_some_info()
     complexity_finder(simple_n3, arr_generator, simple_cleaner, 10).print_some_info()
     complexity_finder(simple_logn, arr_generator, simple_cleaner, 10).print_some_info()
